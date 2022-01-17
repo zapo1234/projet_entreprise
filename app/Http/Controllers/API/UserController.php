@@ -23,7 +23,7 @@ class UserController extends Controller
      */
      public function list()
      {
-      // recupérer les données 
+      // recupérer les données de l'api
       $this->api->getDataJson();
       // renvoi de la vue
       return view('article.list');
