@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\ChartJsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,7 @@ Route::get("/home", [HomeController::class, "index"])->name('home');
 Route::get("/api/products", [UserController::class, "product"])->name('product');
 
 });
-// désactiver des routes reset passeword
+// désactiver des routes reset password
 Auth::routes([
     'verify' => false,
     'reset' => false
@@ -34,3 +35,6 @@ Auth::routes([
 
 // example data json Api 
   Route::get("/api/listes", [UserController::class, "list"])->name('list');
+
+// chart js exemple mini dashbord excercie Elyamaje 
+Route::get('chartjs', [ChartJsController::class, 'chartjs'])->name('chartjs.index');

@@ -62,15 +62,16 @@ class Apicall
      $data = file_get_contents($file);
      // renvoi les données sous formes de tableau(array)
      $data = json_decode($data,true);
+     
      // initiliser des array
      $donnees = [];
      foreach($data as $values)
      {
-      $donnees[] = $values['billing'];
+      $donnees[] = $values['total'];
      }
      //dd($donnees);
      // afficher les données tiré de l'api
-     dd($data);
+      return $donnees;
    }
 
 }
