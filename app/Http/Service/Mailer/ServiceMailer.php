@@ -26,7 +26,7 @@ class ServiceMailer
            $mail->Port       = 465;                                    
            //Recipients
            $mail->setFrom($from);
-           $mail->addAddress('$to', 'Elyamaje');   
+           $mail->addAddress($to, 'Elyamaje');   
            $mail->addAddress($adresse);        
            //Content
            $mail->isHTML(true);                                  
