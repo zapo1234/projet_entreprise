@@ -25,7 +25,6 @@ class UserController extends Controller
      {
        // recupérer les données de l'api
        $data = $this->api->getDataJson();
-       dd($data);
 
        if(count($data) >1)
        {
