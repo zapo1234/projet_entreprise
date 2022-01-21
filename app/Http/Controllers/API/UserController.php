@@ -25,6 +25,8 @@ class UserController extends Controller
      {
        // recupérer les données de l'api
        $data = $this->api->getDataJson();
+       dd($data);
+
        if(count($data) >1)
        {
          $ref ='bonjour';
@@ -32,6 +34,17 @@ class UserController extends Controller
        else{
          $ref ='bonsoir';
        }
+       // insert data into table article
+       foreach($data as $values){
+        $article = new Article();
+        $article->name = $values['billing']['first_name'];
+        $article->categories = $values['total'];
+        $article->total = $values['total'];
+        $article->identifiant = $values['total'];
+        $article->ref_id = $values['total'];
+      }
+       // insert into bdd
+        $article ->save();
        // renvoi de la vue
        return view('article.list', compact('ref'));
      }
@@ -39,8 +52,7 @@ class UserController extends Controller
      public function data()
      {
        $article = new Article();
-       $donnes = $aticle->getUser();
-       dd($donnes);
+       
      }
 
 }

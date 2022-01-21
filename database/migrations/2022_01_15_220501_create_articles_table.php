@@ -18,11 +18,10 @@ class CreateArticlesTable extends Migration
             $table->string("name", 120);
             $table->string("categories", 50)->nullable();
             $table->string("identifiant", 50)->nullable();
-            $table->integer("price");
-            $table->enum("expense", ["oui", "non"]);
-            $table->text("observation");
-            $table->timestamp("created_at")->useCurrent();
-            
+            $table->integer("total");
+            $table->integer('ref_id');
+            $table->timestamp('updated_at')->nullable();
+            $table->timestamp('created_at')->nullable();
         });
     }
 

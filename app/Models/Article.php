@@ -16,7 +16,8 @@ class Article extends Model
     protected $fillable = [
       'name',
       'categories',
+      'identifiant',
       'total',
-
-  ];
+      'ref_id',
+    ];
 }
