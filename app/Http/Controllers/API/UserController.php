@@ -51,7 +51,6 @@ class UserController extends Controller
      public function data()
      {
        $article = new Article();
-       
      }
 
 }

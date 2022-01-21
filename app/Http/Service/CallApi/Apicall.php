@@ -11,8 +11,8 @@ class Apicall
    */
    public function getData(string $url): array
    {
-     $response = Http::get($url);
-     return $response->json();
+      $response = Http::get($url);
+      return $response->json();
    }
 
   public function getWocommerce(string $url,string $apikey, string $apikes, string $data)
@@ -30,7 +30,7 @@ class Apicall
       ]
      );
      // renvoi les données en json
-     $data = json_encode($woocommerce->get($data));
+     $data = json_decode($woocommerce->get($data));
      return $data;
   }
 
@@ -61,8 +61,8 @@ class Apicall
      // renvoi le fichier sous forme de chaine de caractères
      $data = file_get_contents($file);
      // renvoi les données sous formes de tableau(array)
-     $data = json_decode($data,true);
-     return $data;
+     return $this->json_decode($data,true);
+     
    }
 
 }
