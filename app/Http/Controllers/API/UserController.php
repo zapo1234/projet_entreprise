@@ -35,18 +35,18 @@ class UserController extends Controller
          $ref ='bonsoir';
        }
        // insert data into table article
-       foreach($data as $values){
-        $article = new Article();
-        $article->name = $values['billing']['first_name'];
-        $article->categories = $values['total'];
-        $article->total = $values['total'];
-        $article->identifiant = $values['total'];
-        $article->ref_id = $values['total'];
-      }
-       // insert into bdd
-        $article ->save();
-       // renvoi de la vue
-       return view('article.list', compact('ref'));
+       foreach($data as $values) {
+         $article = new Article();
+         $article->name = $values['billing']['first_name'];
+         $article->categories = $values['total'];
+         $article->total = $values['total'];
+         $article->identifiant = $values['total'];
+         $article->ref_id = $values['total'];
+        }
+         // insert into bdd
+         $article ->save();
+         // renvoi de la vue
+         return view('article.list', compact('ref'));
      }
 
      public function data()
