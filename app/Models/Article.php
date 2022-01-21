@@ -8,18 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     use HasFactory;
-    private $user = 2;
-    private $data = [];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+      'name',
+      'categories',
+      'total',
 
-
-    public function getUser()
-    {
-      $this->user = $user;
-    }
-
-    public function setUser()
-    {
-        $this->user = $user;
-        $this->user;
-    }
+  ];
 }

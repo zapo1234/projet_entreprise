@@ -11,10 +11,10 @@ class ServiceMailer
    {
     //Load Composer's autoloader
      require 'vendor/autoload.php';
-    //Create an instance; passing `true` enables exceptions
+    //instant de mailer 
      $mail = new PHPMailer(true);
     
-    try {
+     try {
           //Server settings
            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
            $mail->isSMTP();                                            //Send using SMTP
@@ -23,7 +23,9 @@ class ServiceMailer
            $mail->Username   = 'user@example.com';                     //SMTP username
            $mail->Password   = 'secret';                               //SMTP password
            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            
-           $mail->Port       = 465;                                    
+           $mail->Port       = 465;   
+           //encode Utf 8
+           $mail->CharSet = 'UTF-8';                               
            //Recipients
            $mail->setFrom($from);
            $mail->addAddress($to, 'Elyamaje');   
@@ -41,16 +43,9 @@ class ServiceMailer
           echo "eror: {$mail->ErrorInfo}";
     }
      
-
-
    }
 
-
-
-
-
-
-}
+}°°
 
 
 
