@@ -38,3 +38,6 @@ Auth::routes([
 
 // chart js exemple mini dashbord excercie Elyamaje 
 Route::get('chartjs', [ChartJsController::class, 'chartjs'])->name('chartjs.index');
+
+// chart js exemple mini dashbord excercie Elyamaje 
+Route::get('data', [UserController::class, 'Pdfdata'])->name('pdfdata');
