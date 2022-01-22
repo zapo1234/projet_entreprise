@@ -8,5 +8,7 @@ interface ArticleInterface
     
     public function Insert(); // insert datas articles
 
+    public function getName();// recupérer le nom du user.
+
 }
 

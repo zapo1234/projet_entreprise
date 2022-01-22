@@ -3,6 +3,7 @@
 namespace App\Repository\Article;
 use App\Models\Article;
 use App\Http\Service\CallApi\Apicall;
+use DB;
 
 class ArticleRepository implements ArticleInterface
 {
@@ -34,6 +35,13 @@ class ArticleRepository implements ArticleInterface
        }
         // insert into bdd
         $article ->save();
+     }
+
+
+     public function getName(string $name)
+     {
+       // recupérer le nom de l'article
+       Article::where('name', $name)->first();
      }
 
 }
