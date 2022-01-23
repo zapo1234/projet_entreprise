@@ -21,27 +21,29 @@ class ArticleRepository implements ArticleInterface
 
   public function Insert()
   {
-      // recupérer les données de l'api
-      $data = $this->api->getDataJson();
-      $article = new Article();
-      // insert data into table article
-      foreach($data as $values) {
+       // recupérer les données de l'api
+       $data = $this->api->getDataJson();
+       // insert data into table article
+       $total = [];
       // verifier l'unicité du nom
-      $datas = $this->getName();
-      dd($datas);
-      if($datas) {
-      $article->name = $values['billing']['first_name'];
-      $article->categories = $values['total'];
-      $article->total = $values['total'];
-      $article->identifiant = $values['total'];
-      $article->ref_id = $values['total'];
-      // insert into bdd
-      $article ->save();
+       $datas = $this->getName();
+      foreach($data as $values) {
+        
+        $list = $values['billing']['first_name'].' ';
+        $array = explode(' ', $list);
+      
+         if(!in_array($values['billing']['first_name'],$datas))
+         {
+          $article = new Article();
+          $article->name = $values['billing']['first_name'];
+          $article->categories = $values['total'];
+          $article->total = $values['total'];
+          $article->identifiant = $values['total'];
+          $article->ref_id = $values['total'];
+          // insert into bdd
+          $article ->save();
+        }
       }
-      else{
-         dd('pas en accord');
-      }
-     }
     
     }
 
