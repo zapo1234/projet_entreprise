@@ -25,28 +25,29 @@ class ArticleRepository implements ArticleInterface
        $data = $this->api->getDataJson();
        // insert data into table article
        $total = [];
-      // verifier l'unicité du nom
+      // verifier l'unicité du nom,récupérer le tableau des names
        $datas = $this->getName();
       foreach($data as $values) {
-        
-        $list = $values['billing']['first_name'].' ';
-        $array = explode(' ', $list);
-      
-         if(!in_array($values['billing']['first_name'],$datas))
-         {
-          $article = new Article();
-          $article->name = $values['billing']['first_name'];
-          $article->categories = $values['total'];
-          $article->total = $values['total'];
-          $article->identifiant = $values['total'];
-          $article->ref_id = $values['total'];
+         
+        if(!in_array($values['billing']['first_name'],$datas))
+        {
+           $article = new Article();
+           $article->name = $values['billing']['first_name'];
+           $article->categories = $values['total'];
+           $article->total = $values['total'];
+           $article->identifiant = $values['total'];
+           $article->ref_id = $values['total'];
           // insert into bdd
-          $article ->save();
+           $article ->save();
         }
       }
     
     }
 
+    /**
+     * 
+     *@return array
+     */
 
     public function getName(): array
     {
@@ -64,8 +65,8 @@ class ArticleRepository implements ArticleInterface
            $donnees[] = $val;
          }
       }
-
-      return $donnees;
+        // renvoi un tableau de valeurs
+        return $donnees;
     }
 
 }

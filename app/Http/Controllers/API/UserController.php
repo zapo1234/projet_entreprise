@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Article;
+use App\Mail\TestMail;
 use App\Repository\Article\ArticleRepository;
 use App\Http\Service\CallApi\Apicall;
 use App\Http\Service\FilePdf\CreatePdf;
@@ -48,9 +49,26 @@ class UserController extends Controller
          return view('article.list', compact('ref'));
       }
 
+      /**
+     * Return list des articles.
+     * @return $this
+     */
+
       public function Pdfdata()
       {
-      return $this->articleRepository->getAll();
+        return $this->articleRepository->getAll();
+      }
+      
+     /**
+     * Send email.
+     *
+     * @return $this
+     */
+
+      public function SendEmail()
+      {
+        // envoi mail
+
       }
 
 }
