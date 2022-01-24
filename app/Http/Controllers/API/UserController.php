@@ -23,9 +23,9 @@ class UserController extends Controller
      ArticleRepository $articleRepository
      )
     {
-      $this->api = $api;
-      $this->pdf = $pdf;
-      $this->articleRepository = $articleRepository;
+       $this->api = $api;
+       $this->pdf = $pdf;
+       $this->articleRepository = $articleRepository;
     }
     
     /**
@@ -49,7 +49,7 @@ class UserController extends Controller
          return view('article.list', compact('ref'));
       }
 
-      /**
+     /**
      * Return list des articles.
      * @return $this
      */
