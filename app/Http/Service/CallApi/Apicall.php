@@ -29,12 +29,12 @@ class Apicall
       'query_string_auth' => true
       ]
      );
-     // renvoi les données en json
-     $data = json_encode($woocommerce->get($data));
-     return $data;
+       // renvoi les données en json
+       $data = json_encode($woocommerce->get($data));
+       return $data;
   }
 
-  public function getDataDolibar(string $apikey,string $url)
+  public function getDataDolibar(string $apikey,string $url): array
   {
      // recupération des données getData dolibar api
      $curl = curl_init();
@@ -42,13 +42,12 @@ class Apicall
      
      curl_setopt($curl, CURLOPT_URL, $url);
      curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-          curl_setopt($curl, CURLOPT_HTTPHEADER, $httpheader);
-     
+     curl_setopt($curl, CURLOPT_HTTPHEADER, $httpheader);
      $result = curl_exec($curl);
-     
      curl_close($curl);
-     
-     return $result;
+     // transform en array les données
+     $data = json_decode($result,true);
+     return $data;
 
   }
 

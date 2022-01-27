@@ -65,7 +65,7 @@ class ArticleRepository implements ArticleInterface
            $donnees[] = $val;
          }
       }
-        // renvoi un tableau de valeurs
+        // renvoi un tableau array de valeurs
         return $donnees;
     }
 
