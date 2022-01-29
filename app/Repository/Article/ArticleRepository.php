@@ -27,9 +27,9 @@ class ArticleRepository implements ArticleInterface
        $total = [];
       // verifier l'unicité du nom,récupérer le tableau des names
        $datas = $this->getName();
-      foreach($data as $values) {
-         
-        if(!in_array($values['billing']['first_name'],$datas))
+      foreach($data as $values) 
+      {
+         if(!in_array($values['billing']['first_name'],$datas))
         {
            $article = new Article();
            $article->name = $values['billing']['first_name'];
@@ -44,13 +44,13 @@ class ArticleRepository implements ArticleInterface
     
     }
 
-    /**
-     * 
-     *@return array
-     */
+/**
+ * 
+ *@return array
+ */
 
-    public function getName(): array
-    {
+   public function getName(): array
+   {
        // recupérer les names dans la base de données 
        $name_list = DB::table('articles')->select('name')->get();
        // transformer les retour objets en tableau
@@ -67,6 +67,6 @@ class ArticleRepository implements ArticleInterface
       }
         // renvoi un tableau array de valeurs
         return $donnees;
-    }
+  }
 
 }

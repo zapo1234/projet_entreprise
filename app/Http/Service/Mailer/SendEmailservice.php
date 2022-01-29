@@ -6,7 +6,7 @@ use App\Mail\TestMail;
 
 class SendEmailservice
 {
-    public $mail;
+    private $mail;
 
     public function __construct(TestMail $mail)
     {
@@ -15,7 +15,7 @@ class SendEmailservice
 
     public function getBulid()
     {
-        return $mail->build();
+        return $this->mail->build();
     }
 
 }
