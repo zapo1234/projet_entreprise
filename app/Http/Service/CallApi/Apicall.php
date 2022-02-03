@@ -11,41 +11,41 @@ class Apicall
    */
    public function getData(string $url): array
    {
-     $response = Http::get($url);
-     return $response->json();
+       $response = Http::get($url);
+       return $response->json();
    }
 
   public function getWocommerce(string $url,string $apikey, string $apikes, string $data)
   {
-          // getdata api rest woocommerce 
-          //apikey customer keys , apikeys clé secret
+        // getdata api rest woocommerce 
+        //apikey customer keys , apikeys clé secret
           $woocommerce = new Client(
           $url,
           $apikey,
           $apikeys,
-      [
-      'wp_api'=> true,
-      'version' => 'wc/v3',
-      'query_string_auth' => true
-      ]
+        [
+         'wp_api'=> true,
+         'version' => 'wc/v3',
+         'query_string_auth' => true
+        ]
      );
-       // renvoi les données en json
-       $data = json_encode($woocommerce->get($data));
-       return $data;
+        // renvoi les données en json
+        $data = json_encode($woocommerce->get($data));
+        return $data;
   }
 
   public function getDataDolibar(string $apikey,string $url): array
   {
-     // recupération des données getData dolibar api
+     // recupération des données de l'api dolibar
      $curl = curl_init();
-     $httploader = ['DOLAPAIKEY: '.$apikey];
+     $httploader = ['DOLAPIKEY: '.$apikey];
      
      curl_setopt($curl, CURLOPT_URL, $url);
      curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
      curl_setopt($curl, CURLOPT_HTTPHEADER, $httpheader);
      $result = curl_exec($curl);
      curl_close($curl);
-     // transform en array les données
+     // transformer en array les données
      $data = json_decode($result,true);
      return $data;
 

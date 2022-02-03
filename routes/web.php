@@ -31,6 +31,7 @@ Route::get("/api/products", [UserController::class, "product"])->name('product')
 Auth::routes([
     'verify' => false,
     'reset' => false
+    
   ]);
 
 // example data json Api 

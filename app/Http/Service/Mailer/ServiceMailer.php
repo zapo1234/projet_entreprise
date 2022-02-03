@@ -9,10 +9,10 @@ class ServiceMailer
 {
    public function SendMail(string $to, string $from, string $subject, string $adresse)
    {
-    //Load Composer's autoloader
-     require 'vendor/autoload.php';
-    //instant de mailer 
-     $mail = new PHPMailer(true);
+       //Load Composer's autoloader
+       require 'vendor/autoload.php';
+       //instant de mailer 
+       $mail = new PHPMailer(true);
     
      try {
           //Server settings
