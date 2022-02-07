@@ -7,16 +7,15 @@ use PDF;
 
 class CreatePdf
 {
-   public function createpdf()
-   {
-     $data = Article::all();
-     return PDF::loadView('article.data', compact('data'))
-     ->setPaper('a4', 'landscape')
-     ->setWarnings(false)
-     ->save(public_path("Upload/fichier.pdf"))
-     ->stream();
-     
-   }
+    public function createpdf()
+    {
+       $data = Article::all();
+       return PDF::loadView('article.data', compact('data'))
+       ->setPaper('a4', 'landscape')
+       ->setWarnings(false)
+       ->save(public_path("Upload/fichier.pdf"))
+       ->stream();
+    }
 
 }
 

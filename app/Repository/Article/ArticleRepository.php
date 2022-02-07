@@ -42,7 +42,7 @@ class ArticleRepository implements ArticleInterface
         }
       }
     
-    }
+   }
 
 /**
  * 

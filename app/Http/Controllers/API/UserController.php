@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Article;
 use App\Mail\TestMail;
@@ -34,6 +35,11 @@ class UserController extends Controller
      */
      public function list()
      {
+         if(Auth::check())
+         {
+            $x = Auth::user()->id;
+            dd($x);
+         }
          // recupérer les données de l'api
          $data = $this->api->getDataJson();
          if(count($data) >1)

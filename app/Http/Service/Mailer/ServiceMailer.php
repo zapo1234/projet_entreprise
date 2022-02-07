@@ -7,7 +7,7 @@ use PHPMailer\PHPMailer\Exception;
 
 class ServiceMailer
 {
-   public function SendMail(string $to, string $from, string $subject, string $adresse)
+   public function SendMail(string $to, string $from, string $subject, string $adresse, string $message)
    {
        //Load Composer's autoloader
        require 'vendor/autoload.php';
@@ -23,7 +23,7 @@ class ServiceMailer
            $mail->Username   = 'user@example.com';                     //SMTP username
            $mail->Password   = 'secret';                               //SMTP password
            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            
-           $mail->Port       = 465;   
+           $mail->Port       = 587;   
            //encode Utf 8
            $mail->CharSet = 'UTF-8';                               
            //Recipients
@@ -33,19 +33,26 @@ class ServiceMailer
            //Content
            $mail->isHTML(true);                                  
            $mail->Subject = $subject;
-           $mail->Body    = $body;
-           $mail->AltBody = $body;
+           $mail->Body    = $message;
+           $mail->AltBody = $message;
         
            // send Mail
-           $mail->send();
-           echo 'Send mail';
+           $email = $mail->send();
+           if($mail)
+           {
+              echo 'Send mail';
+           }
+           else
+           {
+             dd('echec d\'envoi');
+           }
        }    catch (Exception $e) {
           echo "eror: {$mail->ErrorInfo}";
     }
      
    }
 
-}°°
+}
 
 
 
