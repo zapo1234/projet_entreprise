@@ -40,11 +40,36 @@ class LoginController extends Controller
     }
 
     /**
+     * login Auth
+     * @return 
+     */
+
+    public function login(Request $request)
+    {
+       $input = $request->all();
+       $this->validate($request, [
+        'email' => 'required|email',
+        'password' => 'required',
+       ]);
+
+        if(auth()->attempt(array('email' => $input['email'], 'password' =>$input['password'])))
+        {
+            return redirect()->route('home');
+        }
+        else
+        {
+           return redirect()->route('login')->with('error','vos accès sont incorrectes');
+        }
+       
+    }
+
+    /**
      * Create a new controller instance.
      * redirigé user après logout vers la route login
      * @return void
      */
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
         $this->guard()->logout();
         $request->session()->flush();
         $request->session()->regenerate();
