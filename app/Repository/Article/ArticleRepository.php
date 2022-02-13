@@ -21,14 +21,75 @@ class ArticleRepository implements ArticleInterface
 
   public function Insert()
   {
-       // recupérer les données de l'api
+       // recupérer les données de l'api json1
        $data = $this->api->getDataJson();
+       
+       $das = [];
+       $ba = [];
+       foreach($data as $keys => $values)
+       {
+          $das[] = $values['line_items'];
+          foreach($das as  $va)
+          {
+             foreach($va as $key => $ma)
+             {
+                 $ba[] = [
+                         'id' => $ma['id'],
+                         'libelle' => $ma['name'],
+                         'quantity' => $ma['quantity'],
+                         'total' => $ma['total']
+                        ];
+             }
+          }
+       }
+       $temp = array_unique(array_column($ba, 'id'));
+       $unique_arr = array_intersect_key($ba, $temp);
+       dd($unique_arr);
+      //recuperer mes données json api 2
+      $donnees = $this->api->getDataJson1();
+
        // insert data into table article
        $total = [];
       // verifier l'unicité du nom,récupérer le tableau des names
        $datas = $this->getName();
+       $dat = [];
+       $dat1 =[];
+       $dats = [];
       foreach($data as $values) 
       {
+
+       foreach($donnees as $vals)
+       {
+         
+         $dats[] = $vals['lines'];
+
+         foreach($dats as $keys => $dol)
+         {
+            foreach($dol as $dols)
+            {
+              foreach($dat as $keys => $val)
+              {
+               foreach($val as $dd)
+               {
+                  if(strcmp($dols['libelle'],$dd['name'])==0)
+                  {
+                    $dat1[] = [
+                   'libelle' => $dd['name'],
+                   'quantite' =>$dols['qty']+$dd['quantity']
+                  ];
+                  
+               
+                }
+
+             }
+           }
+         
+        }
+      }
+      dd($dat);
+   }
+      
+         
          if(!in_array($values['billing']['first_name'],$datas))
         {
            $article = new Article();
@@ -41,6 +102,7 @@ class ArticleRepository implements ArticleInterface
            $article ->save();
         }
       }
+    
     
    }
 
@@ -72,6 +134,6 @@ class ArticleRepository implements ArticleInterface
     public function getIdArticle(int $id)
     {
        return Article::find($id);
-   }
+    }
 
 }

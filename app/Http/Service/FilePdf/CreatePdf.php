@@ -3,10 +3,18 @@
 namespace App\Http\Service\FilePdf;
 
 use App\Models\Article;
+use App\Repository\Article\ArticleRepository;
 use PDF;
 
 class CreatePdf
 {
+    private $articleRepository;
+
+    public function __construct(ArticleRepository $articleRepository)
+    {
+       $this->articleRepository = $articleRepository;
+    }
+
     public function createpdf()
     {
        $data = Article::all();

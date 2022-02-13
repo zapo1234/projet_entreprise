@@ -58,7 +58,7 @@ class LoginController extends Controller
         }
         else
         {
-           return redirect()->route('login')->with('error','vos accès sont incorrectes');
+           return redirect()->route('login')->with('error','vos identifiants sont incorrectes !');
         }
        
     }

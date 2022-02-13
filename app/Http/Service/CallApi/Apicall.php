@@ -30,7 +30,7 @@ class Apicall
         ]
      );
         // renvoi les données en json
-        $data = json_encode($woocommerce->get($data));
+        $data = $woocommerce->get($data);
         return $data;
   }
 
@@ -63,6 +63,19 @@ class Apicall
      $data = json_decode($data,true);
      return $data;
    }
+
+   /** 
+   *@return array
+   */
+  public function getDataJson1(): array
+  {
+    $file = public_path() . "/Upload/project1.json";
+    // renvoi le fichier sous forme de chaine de caractères
+    $data = file_get_contents($file);
+    // renvoi les données sous formes de tableau(array)
+    $data = json_decode($data,true);
+    return $data;
+  }
 
 }
 

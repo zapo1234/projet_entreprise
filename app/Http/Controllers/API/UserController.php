@@ -37,8 +37,8 @@ class UserController extends Controller
      {
          if(Auth::check())
          {
-            $x = Auth::user()->id;
-            dd($x);
+            //$x = Auth::user()->id;
+            //dd($x);
          }
          // recupérer les données de l'api
          $data = $this->api->getDataJson();

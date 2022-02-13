@@ -37,7 +37,7 @@ class ServiceMailer
            $mail->AltBody = $message;
         
            // send Mail
-           $email = $mail->send();
+           $mail = $mail->send();
            if($mail)
            {
               echo 'Send mail';
