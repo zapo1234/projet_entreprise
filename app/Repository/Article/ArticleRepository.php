@@ -42,6 +42,7 @@ class ArticleRepository implements ArticleInterface
              }
           }
        }
+       // renvoyer un tableau unique par id commande
        $temp = array_unique(array_column($ba, 'id'));
        $unique_arr = array_intersect_key($ba, $temp);
        dd($unique_arr);
