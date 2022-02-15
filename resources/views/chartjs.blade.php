@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-10 offset-md-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard  Elyamaje Marseille</div>
+                <div class="pa">Dashboard  Elyamaje Marseille</div>
                 <div class="panel-body">
                     <canvas id="canvas" height="280" width="600"></canvas>
                 </div>
