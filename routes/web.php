@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\ChartJsController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,8 @@ Route::group(['middleware' => ['auth']], function () {
 // redirection home
 Route::get("/home", [HomeController::class, "index"])->name('home');
 Route::get("/api/products", [UserController::class, "product"])->name('product');
+
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 });
 // désactiver des routes reset password
