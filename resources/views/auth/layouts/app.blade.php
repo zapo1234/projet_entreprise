@@ -20,7 +20,7 @@
     <!-- Custom styles for this template-->
     <link href="{{asset('admin/css/sb-admin-2.min.css')}}" rel="stylesheet">
     <style>
-    
+    #imj{margin-left:40%;margin-top:00px;}
     </style>
 </head>
 
