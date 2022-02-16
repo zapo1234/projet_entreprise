@@ -11,7 +11,7 @@
  
                     <div class="col-lg-10"><br/>
 					<img id="imj" src="{{ asset('admin/img/Logo_elyamaje.png')}}" width="95px";
-					height="80px">
+					height="auto">
                         <div class="p-5">
                             <div class="text-center">
                                 <h1>Accès au service</h1>
