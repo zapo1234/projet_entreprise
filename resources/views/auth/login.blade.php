@@ -6,10 +6,10 @@
     <div class="col-xl-8 col-lg-7 col-md-1">
 
         <div class="card o-hidden border-0 shadow-lg my-5">
-            <div class="card-body p-0">
+            <div class="card">
                 <!-- Nested Row within Card Body -->
  
-                    <div class="col-lg-6"><br/>
+                    <div class="col-lg-10"><br/>
 					<img id="imj" src="{{ asset('admin/img/Logo_elyamaje.png')}}" width="95px";
 					height="80px">
                         <div class="p-5">
