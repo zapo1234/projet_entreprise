@@ -28,7 +28,8 @@ Route::get("/home", [HomeController::class, "index"])->name('home');
 Route::get("/api/products", [UserController::class, "product"])->name('product');
 
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
-Route::get('admin/home', 'HomeController@adminHome')->name('admin.home')->middleware('is_admin');
+Route::get("/user", [HomeController::class, "homes"])->name('user')->middleware('is_admin');
+
 
 });
 // désactiver des routes reset password
