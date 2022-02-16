@@ -10,8 +10,8 @@
                 <!-- Nested Row within Card Body -->
  
                     <div class="col-lg-6"><br/>
-					<img id="imj" src="{{ asset('admin/img/Logo_elyamaje.png')}}" width="85px";
-					height="75px">
+					<img id="imj" src="{{ asset('admin/img/Logo_elyamaje.png')}}" width="95px";
+					height="80px">
                         <div class="p-5">
                             <div class="text-center">
                                 <h1>Accès au service</h1>
