@@ -54,11 +54,19 @@ class LoginController extends Controller
 
         if(auth()->attempt(array('email' => $input['email'], 'password' =>$input['password'])))
         {
-            return redirect()->route('home');
+            if(auth()->user()->is_admin == 1)
+            {
+               return redirect()->route('home');
+            }
+
+            if(auth()->user()->is_admin == 2)
+            {
+              return redirect()->route('user');
+            }
         }
         else
         {
-           return redirect()->route('login')->with('error','vos identifiants sont incorrectes !');
+           return redirect()->route('login')->with('error','Identifiants incorrectes !');
         }
        
     }
