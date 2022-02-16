@@ -19,12 +19,12 @@ class IsAdmin
         if(auth()->user()->is_admin == 1){
             return $next($request);
         }
-        if(auth()->user->is_admin == 2)
+        if(auth()->user()->is_admin == 2)
         {
             return $next($request);
         }
 
-        if(auth()->user->is_admin == 3)
+        if(auth()->user()->is_admin == 3)
         {
             return $next($request);
         }
