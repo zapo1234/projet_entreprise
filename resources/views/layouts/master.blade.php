@@ -37,7 +37,11 @@
         @endif
 
         @if(auth()->user()->is_admin == 2)
-        @include('common.slider_amabassadrice')
+        @include('common.slider_ambassadrice')
+        @endif
+
+        if(auth()->user()->is_admin == 3)
+        @include('common.slider_comptable')
         @endif
         <!-- End of Sidebar -->
 
