@@ -29,6 +29,7 @@ Route::get("/api/products", [UserController::class, "product"])->name('product')
 
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get("/user", [HomeController::class, "homes"])->name('user')->middleware('is_admin');
+Route::get("/comptable", [HomeController::class, "compta"])->name('comptable.comptas')->middleware('is_admin');
 
 
 });
