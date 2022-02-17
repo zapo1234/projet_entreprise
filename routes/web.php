@@ -40,6 +40,10 @@ Auth::routes([
     
   ]);
 
+// reset password
+  Route::get("/reset/password", [ResetPasswordController::class, "reset_pass"])->name('auth.passwords.reset');
+
+
 // example data json Api 
   Route::get("/api/listes", [UserController::class, "list"])->name('list');
 
