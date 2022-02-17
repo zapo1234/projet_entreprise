@@ -16,7 +16,8 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->is_admin == 1){
+        if(auth()->user()->is_admin == 1)
+        {
             return $next($request);
         }
         if(auth()->user()->is_admin == 2)
@@ -28,5 +29,11 @@ class IsAdmin
         {
             return $next($request);
         }
+
+        if(auth()->user()->is_admin == 4)
+        {
+            return $next($request);
+        }
+           
     }
 }
