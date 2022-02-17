@@ -56,12 +56,22 @@ class LoginController extends Controller
         {
             if(auth()->user()->is_admin == 1)
             {
-               return redirect()->route('home');
+               return redirect()->route('superadmin.home');
             }
 
-            if(auth()->user()->is_admin == 2)
+            elseif(auth()->user()->is_admin == 2)
             {
-              return redirect()->route('user');
+              return redirect()->route('amabassadirece.user');
+            }
+            
+            elseif(auth()->user()->is_admin == 3)
+            {
+                return redirect()->route('comptable.comptas');
+            }
+            
+            else
+            {
+                return redirect()->route('other.users');
             }
         }
         else
