@@ -27,7 +27,7 @@ class ApicallSystemsController extends Controller
     
     // recuperer les données api dolibar.
        $method = "GET";
-       $apiKey = "wH5YU4soGdBq2y7VHy3Xn24iI3q02oQZ";
+       $apiKey = "4LAI7pNFl3oM7znLc8II9tB7xu7o2r7C";
        $apiUrl = "http://localhost/dolibarr/htdocs/api/index.php/";
        //appelle de la fonction  Api
       // $data = $this->api->getDatadolibar($apikey,$url);
@@ -35,7 +35,7 @@ class ApicallSystemsController extends Controller
        
       //Recuperer les ref et id product dans un tableau
 	   
-	    $produitParam = ["limit" => 100, "sortfield" => "rowid"];
+	    $produitParam = ["limit" => 10000, "sortfield" => "rowid"];
 	     $listproduct = $this->api->CallAPI("GET", $apiKey, $apiUrl."products", $produitParam);
 
       
@@ -54,24 +54,34 @@ class ApicallSystemsController extends Controller
      $listorders_id = $this->api->CallAPI("GET", $apiKey, $apiUrl."invoices", $produitParam);
      //
      $list_id = json_decode($listorders_id,true);
-     
+   
     // recupérer dans un array les valeurs
     foreach($list_id as $val1)
-    {
+    { 
+      
        $list_id_order[] = $val1['ref_client'];// recupérer les id commande  oders de woocomerce
     }
 
-    $array_donnees = array_unique($list_id_order);
+    $array_donnees = array_unique($list_id_order);// recupérer les ref client qui devient id commande de dolibar
     
     
      $list_tier = json_decode($list_tiers,true);
+   
      // recupérer les email existant dans tiers
      $data_email = [];
      $data_list = []; //tableau associative de id et email
+     $data_code =[];// tableau associative entre id(socid et le code client )
+
      foreach($list_tier as $val)
      {
         $data_email[$val['code_client']] = $val['email'];
         $data_list[$val['id']] = $val['email'];
+
+        // recupérer les codes client deuit le customer id (woocomerce)
+        $code_cl = explode('-',$val['code_client']);
+        $code_cl_true = $code_cl[2];// customer_id venant de woocomerce.
+          $data_code[$val['id']] = $val['code_client'];
+        
      }
      
      // recuperer dans un tableau les ref_client existant id.
@@ -145,6 +155,8 @@ class ApicallSystemsController extends Controller
         $socid = $id_cl++;
         $woo ="woocommerce";
         $name="";
+        $code = $donnees['customer_id'];//customer_id dans woocomerce
+        $code_client ="WC-AN2022-$code";// recupérer le customer id dans wocoomerce
         $data_tiers[] =[ 
 
                  'entity' =>'1',
@@ -153,14 +165,16 @@ class ApicallSystemsController extends Controller
                  'email' => $donnees['billing']['email'],
                  'phone' => $donnees['billing']['phone'],
                  'client' 	=> '1',
-                'code_client'	=> '-1'
+                'code_client'	=> $code_client
         ];
            
    
       }
        
-      // recupére les line d'artilce liée achété du client 
+      // recupére les lines d'artilce liée achété du client 
       $list_refs =[];
+      // recupérer tous les id product et leur quantité
+      $list_product_stocks =[];
       foreach($donnees['line_items'] as $key => $values)
       {
          //verifié et recupérer id keys existant de l'article
@@ -178,7 +192,10 @@ class ApicallSystemsController extends Controller
                    "ref_ext" => $socid,
                ];
                
- 
+               // recupérer le tableau pour les stocks mouvement
+                $list_product_stocks[] =[
+                  $values['product_id']=>$values['quantity']
+                ];
          }    // recupérer les champs dolibar utile pour les articles liée dans la facture
               // si la commande existe deja avec un id 
               // recupérer les socid en fonction de leur article lié
@@ -218,7 +235,7 @@ class ApicallSystemsController extends Controller
             }
          }
        
-      
+   
       // insérer data tiers dans dolibar.
        foreach($data_tiers as $data){
        // insérer les données tiers dans dolibar
@@ -271,6 +288,8 @@ class ApicallSystemsController extends Controller
                $this->api->CallAPI("PUT", $apiKey, $apiUrl."invoices/".$i, json_encode($newCommandepaye));
          
             }
+
+            // gerer les stocks mouvemts de mise à jours à partir des id product et quantité.
 
          // fixer moyens de paiement mode de reglement sur les facture
          $newValues = [
