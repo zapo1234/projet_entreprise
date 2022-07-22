@@ -314,7 +314,116 @@ class ApicallSystemsController extends Controller
    }
 
 
+    
+    public function invoicespay()
+    {
+      // recuperer les données api dolibar.
+       $method = "GET";
+       $apiKey = "4LAI7pNFl3oM7znLc8II9tB7xu7o2r7C";
+       $apiUrl = "http://localhost/dolibarr/htdocs/api/index.php/";
+       //appelle de la fonction  Api
+      // $data = $this->api->getDatadolibar($apikey,$url);
+      // domp affichage test
 
+      // recupérer le dernière id des facture 
+   // recuperer dans un tableau les ref_client existant id.
+   $invoices_id = json_decode($this->api->CallAPI("GET", $apiKey, $apiUrl."invoices", array(
+		"sortfield" => "t.rowid", 
+		"sortorder" => "DESC", 
+		"limit" => "1", 
+		"mode" => "1",
+		)
+	), true);
+
+
+   // recupérer le premier id de la facture
+
+ // recuperer dans un tableau les ref_client existant id.
+   $invoices_asc = json_decode($this->api->CallAPI("GET", $apiKey, $apiUrl."invoices", array(
+		"sortfield" => "t.rowid", 
+		"sortorder" => "ASC", 
+		"limit" => "1", 
+		"mode" => "1",
+		)
+	), true);
+    
+     // recuperer dans un tableau les ref_client existant id.
+     $clientSearch = json_decode($this->api->CallAPI("GET", $apiKey, $apiUrl."thirdparties", array(
+		"sortfield" => "t.rowid", 
+		"sortorder" => "DESC", 
+		"limit" => "1", 
+		"mode" => "1",
+		)
+	), true);
+
+
+   // recupération du dernier id invoices dolibar
+   foreach($invoices_id as $vk)
+   {
+      $inv = $vk['id'];
+   }
+
+   // recupérer le premier id de la facture
+   foreach($invoices_asc as $vks)
+   {
+      $inc = $vks['id'];
+   }
+   
+
+   
+   foreach($clientSearch as $data)
+   {
+        $tiers_ref = $data['id'];
+   }
+     
+   // convertir en entier la valeur.
+     $id_cl = (int)$tiers_ref;
+      $id_cl = $id_cl+1;
+      $socid ="";
+      // id  du dernier invoices(facture)
+      $inv = (int)$inv;
+     $inv = $inv +1;
+     
+
+     $list_id_order = [];
+     $produitParam = ["limit" => 10000, "sortfield" => "rowid"];
+     $listorders_id = $this->api->CallAPI("GET", $apiKey, $apiUrl."invoices", $produitParam);
+     //
+     $list_id = json_decode($listorders_id,true);
+     $nombre = count($list_id);
+      
+     // valider invoice
+     $newCommandeValider = [
+      "idwarehouse"	=> "0",
+      "notrigger"		=> "0",
+      ];
+    
+     $newCommandepaye = [
+      "paye"	=> 1,
+      "statut"	=> 2,
+      ];
+   // passer les factures validé  en mode payant
+   //statut =2 et paye =2;// faire une modification
+
+      for($i=$inc; $i<$inv+1; $i++)
+      {
+        $this->api->CallAPI("POST", $apiKey, $apiUrl."invoices/".$i."/validate", json_encode($newCommandeValider));
+        
+      }
+
+      for($i=$inc; $i<$inv+1; $i++)
+      {
+        $this->api->CallAPI("PUT", $apiKey, $apiUrl."invoices/".$i, json_encode($newCommandepaye));
+      }
+
+      
+      //$this->api->CallAPI("PUT", $apiKey, $apiUrl."invoices/".$a, json_encode($newCommandepaye));
+       
+    }
+
+    
+    
+    
 
 }
 
