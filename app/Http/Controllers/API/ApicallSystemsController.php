@@ -70,17 +70,19 @@ class ApicallSystemsController extends Controller
      // recupérer les email existant dans tiers
      $data_email = [];
      $data_list = []; //tableau associative de id et email
+    
      $data_code =[];// tableau associative entre id(socid et le code client )
-
+     
+     
      foreach($list_tier as $val)
      {
         $data_email[$val['code_client']] = $val['email'];
         $data_list[$val['id']] = $val['email'];
-
-        // recupérer les codes client deuit le customer id (woocomerce)
+         
+        // recuperer id customer du client et créer un tableau associative.
         $code_cl = explode('-',$val['code_client']);
-        $code_cl_true = $code_cl[2];// customer_id venant de woocomerce.
-          $data_code[$val['id']] = $val['code_client'];
+        $code_cls = $code_cl[2];
+        $data_code[$val['id']] = $code_cls;
         
      }
      
